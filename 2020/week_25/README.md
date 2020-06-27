@@ -1,0 +1,1 @@
+![](https://raw.githubusercontent.com/ysamano/TidyTuesday/master/2020/week_25/black_population.png)
