@@ -23,7 +23,7 @@ data_covers <- covers %>%
 
 data_graph <- data_covers %>% 
   group_by(issue) %>% 
-  mutate(list(crear_coordenadas(total, 0.1))) %>% 
+  mutate(list(crear_radios(total, 0.1))) %>% 
   unnest()
 
 p1 <- ggplot(data_graph) +
