@@ -1,0 +1,1 @@
+![](https://github.com/ysamano/TidyTuesday/blob/master/2020/week_19/periodic_table_animal_crossing.png)
