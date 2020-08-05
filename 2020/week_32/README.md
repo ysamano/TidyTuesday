@@ -1,0 +1,1 @@
+![](https://raw.githubusercontent.com/ysamano/TidyTuesday/master/2020/week_32/European_Energy_production.png)
