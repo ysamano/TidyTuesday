@@ -14,8 +14,7 @@ my_theme <- theme_ybn_w(base_size = 8,
                         axis_text = F,
                         axis_title = F) +
   theme(legend.position = "none",
-        strip.text = element_blank(),
-        panel.spacing.x = unit(1, "lines"))
+        strip.text = element_blank())
 
 
 crear_coord <- function(conventional, nuclear, renewable) {
@@ -50,7 +49,12 @@ total_type <- energy_types %>%
 data_graph <- total_type %>% 
   mutate(list(crear_coord(conventional_thermal, nuclear, renewable))) %>% 
   unnest() %>% 
-  mutate(x_rot = x*cos(pi/4) - y*sin(pi/4),
+  mutate(label_country = str_wrap(country_name, width = 10),
+         label_x = case_when(country %in% c("BA", "MK", "UK") ~ -0.93,
+                             TRUE ~ -0.8),
+         label_y = case_when(country %in% c("BA", "MK", "UK") ~ 0.98,
+                             TRUE ~ 0.85),
+         x_rot = x*cos(pi/4) - y*sin(pi/4),
          y_rot = x*sin(pi/4) + y*cos(pi/4))
 
 
@@ -127,16 +131,17 @@ p2 <- ggplot(data_graph) +
                    group = grupo,
                    fill = grupo),
                color = "#FDFDFB") +
-  geom_text(aes(x = -0.8,
-                y = 0.85,
-                label = factor(country_name)),
+  geom_text(aes(x = label_x,
+                y = label_y,
+                label = factor(label_country)),
             size = 2.5,
             family = "Roboto Condensed Light",
             color = "#110F1A",
             angle = 45,
             hjust = 0) +
-  facet_wrap( ~ country, ncol = 6) +
-  labs(caption = "Data: Eurostat | Desing: Yobanny Samano (@ysamano28)") +
+  facet_wrap( ~ country_name, ncol = 6) +
+  labs(caption = "Data: Eurostat | Design: Yobanny Samano (@ysamano28)") +
+  scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(0, 1.8)) +
   scale_fill_manual(values = c("#BF8E88", "#7A8990", "#42454D")) +
   coord_fixed() +
@@ -146,7 +151,7 @@ p2 <- ggplot(data_graph) +
 patch <- p1 / p2 + plot_layout(heights = c(0.2, 1.2))
 
 
-ggsave(filename = "2020/week_32/type_energy.png", 
+ggsave(filename = "2020/week_32/European_Energy_production.png", 
        plot = patch, 
        height = 230, 
        width = 150, 
