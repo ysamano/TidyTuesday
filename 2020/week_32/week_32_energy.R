@@ -67,6 +67,8 @@ legend <- tibble::tribble(
                  "Nuclear",     6, 0.7
   )
 
+colores <- c("#42454D", "#7EAA91", "#447764")
+
 
 
 p1 <- ggplot(data_graph %>% 
@@ -116,7 +118,7 @@ p1 <- ggplot(data_graph %>%
            size = 2) +
   labs(title = "How European Countries \nGenerated Electricity in 2018",
        subtitle = "Share of Total by Production Type") +
-  scale_fill_manual(values = c("#BF8E88", "#7A8990", "#42454D")) +
+  scale_fill_manual(values = colores) +
   scale_x_continuous(limits = c(-1.5, 8)) +
   scale_y_continuous(limits = c(-0.2, 1.5)) +
   coord_fixed() +
@@ -143,7 +145,7 @@ p2 <- ggplot(data_graph) +
   labs(caption = "Data: Eurostat | Design: Yobanny Samano (@ysamano28)") +
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(0, 1.8)) +
-  scale_fill_manual(values = c("#BF8E88", "#7A8990", "#42454D")) +
+  scale_fill_manual(values = colores) +
   coord_fixed() +
   my_theme
 
@@ -151,7 +153,7 @@ p2 <- ggplot(data_graph) +
 patch <- p1 / p2 + plot_layout(heights = c(0.2, 1.2))
 
 
-ggsave(filename = "2020/week_32/European_Energy_production.png", 
+ggsave(filename = "2020/week_32/European_Energy_production2.png", 
        plot = patch, 
        height = 230, 
        width = 150, 
