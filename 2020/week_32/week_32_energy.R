@@ -17,7 +17,21 @@ my_theme <- theme_ybn_w(base_size = 8,
         strip.text = element_blank())
 
 
-
+crear_coord <- function(conventional, nuclear, renewable) {
+  
+  punto_1 = conventional
+  punto_2 = nuclear/(nuclear + renewable)
+  
+  tibble(grupo = rep(c("Conventional \nthermal", "Nuclear", "Renewable"), each = 4),
+         num_point = rep(1:4, 3),
+         x = c(0, punto_1, punto_1, 0,
+               punto_1, 1, 1, punto_1,
+               punto_1, 1, 1, punto_1),
+         y = c(0, 0, 1, 1,
+               0, 0, punto_2, punto_2,
+               punto_2, punto_2, 1, 1)
+  )
+}
 
 total_type <- energy_types %>% 
   filter(level != "Level 2") %>% 
@@ -51,7 +65,7 @@ legend <- tibble::tribble(
   "Conventional \nthermal",     2, 0.7,
                "Renewable",     4, 0.7,
                  "Nuclear",     6, 0.7
-  )
+)
 
 colores <- c("#42454D", "#7EAA91", "#447764")
 
