@@ -1,0 +1,1 @@
+![](https://raw.githubusercontent.com/ysamano/TidyTuesday/master/2018/week_01/avg_tuition.png)
