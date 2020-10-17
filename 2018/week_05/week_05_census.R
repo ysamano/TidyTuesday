@@ -13,7 +13,7 @@ p1 <- ggplot(data, aes(IncomePerCap,State)) +
   labs(title = "US Census Demographic 2015",
        subtitle = "Income Per Capita by State",
        caption = "US Census Demographic Data 2015 | Graphic: @ysamano28") +
-  theme_ybn_w(base_family = "Roboto Condensed") +
+  theme_ybn_w() +
   theme(axis.title.y = element_blank(),
         panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
@@ -21,7 +21,4 @@ p1 <- ggplot(data, aes(IncomePerCap,State)) +
         plot.subtitle = element_text(hjust = 0.5))
 
 
-ggsave("2018/week_05/census.png", p1, height = 11, width = 8.5, units = "in", dpi = 300)
-  
-  
-  
+ggsave("2018/week_05/census.png", p1, height = 9.3, width = 6.6, units = "in", type = "cairo")
