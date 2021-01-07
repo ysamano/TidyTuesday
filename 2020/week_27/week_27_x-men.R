@@ -40,7 +40,7 @@ p1 <- ggplot(data_graph) +
             family = "Source Sans Pro") +
   labs(title = "Uncanny X-Men Covers",
        subtitle = "Characters depicted on each cover in Chris Claremont era",
-       caption = "Source: The Claremont Run | Graphic: @ysamno28") +
+       caption = "Source: The Claremont Run | Graphic: Yobanny Samano") +
   coord_fixed() +
   theme_ybn_w(base_size = 9,
               title_size = 25,
