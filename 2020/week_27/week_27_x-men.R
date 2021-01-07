@@ -30,19 +30,19 @@ p1 <- ggplot(data_graph) +
   geom_circle(aes(x0 = axis_x,
                   y0 = axis_y,
                   r = radio),
-              color = "#00BFC4",
-              n = 700,
-              size = 0.3) +
+              color = "#71ABC6",
+              n = 800,
+              size = 0.4) +
   geom_text(data = data_covers,
             aes(axis_x, axis_y - 0.8, label = issue),
-            size = 2.5, 
-            colour = "white", 
+            size = 2.7, 
+            colour = "#1b1f2b", 
             family = "Source Sans Pro") +
   labs(title = "Uncanny X-Men Covers",
        subtitle = "Characters depicted on each cover in Chris Claremont era",
        caption = "Source: The Claremont Run | Graphic: @ysamno28") +
   coord_fixed() +
-  theme_ybn_b(colour_background = "#070C29",
+  theme_ybn_w(base_size = 9,
               title_size = 25,
               title_hjust = 0.5,
               subtitle_hjust = 0.5,
@@ -50,5 +50,4 @@ p1 <- ggplot(data_graph) +
               axis_text = F, 
               axis_title = F)
 
-ggsave("2020/week_27/comic.png", p1, height = 12.35, width = 8.5, units = "in", dpi = 300)
-
+ggsave("2020/week_27/comic.png", p1, height = 11, width = 8.5, units = "in", dpi = 300)
