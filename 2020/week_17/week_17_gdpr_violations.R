@@ -27,13 +27,17 @@ p1 <-
     labs(title = "The Universe of GDPR Violations",
          subtitle = "Top Companies",
          caption = "Source: Privacy Affairs | Graphic: @ysamano28 ") +
-    theme_ybn_b(axis_grid = F, axis_text = F, axis_title = F) +
-    theme(legend.position = "none",
-          plot.title = element_text(size = 30,
-                                    hjust = 0.5),
-          plot.subtitle = element_text(size = 18, 
-                                       hjust = 0.5))
-    
+    theme_ybn(colour_background = "#1b1f2b",
+              base_colour = "gray95",
+              title_size = 25,
+              title_face = "bold",
+              title_hjust = 0.5,
+              subtitle_size = 18,
+              caption_hjust = 0.5,
+              plot_margin = margin(20, 10, 20, 10),
+              axis_grid = F,
+              axis_text = F,
+              axis_title = F) +
+    theme(legend.position = "none")
 
-ggsave("2020/week_17/gdpr_violations.png", p1, height = 11, width = 8.5, units = "in", dpi = 300)
-
+ggsave("2020/week_17/gdpr_violations2.png", p1, height = 11, width = 8.5, units = "in", dpi = 300)

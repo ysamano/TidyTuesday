@@ -2,7 +2,6 @@ library(tidyverse)
 
 firsts <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-06-09/firsts.csv')
 
-
 firsts <- firsts %>% 
   mutate(decade = year - year %% 10) %>% 
   group_by(decade) %>% 
@@ -49,10 +48,12 @@ p1 <-
   scale_y_continuous(expand = c(0, 1)) +
   scale_fill_brewer(palette = "Dark2",
                     guide = guide_legend(direction = "horizontal", nrow = 1)) +
-  theme_ybn_b(base_size = 9, base_family = "Roboto Condensed") +
-  theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.title.y = element_blank(),
+  theme_ybn(base_size = 8,
+            base_colour = "white",
+            colour_background = "#1b1f2b",
+            plot_margin = margin(20, 20, 20, 20),
+            axis_grid = FALSE) +
+  theme(axis.title.y = element_blank(),
         axis.text.y = element_blank(),
         legend.key.size = unit(.2, "cm"),
         legend.key.width = unit(0.7,"cm"),
@@ -60,5 +61,4 @@ p1 <-
         legend.text = element_text(size = 7),
         legend.title = element_blank())
 
-ggsave("2020/week_24/African-American_Achievements.png", p1, height = 6, width = 11, units = "in", dpi = 300)
-
+ggsave("2020/week_24/African-American_Achievements.png", p1, height = 7, width = 11.5, units = "in", dpi = 300)

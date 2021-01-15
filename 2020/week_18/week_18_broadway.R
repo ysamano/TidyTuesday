@@ -10,10 +10,8 @@ cpi <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytu
 
 pre_1985_starts <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/pre-1985-starts.csv')
 
-
 cpi <- cpi %>%
     mutate(jan_2020_dollars = cpi[year_month == "2020-01-01"] / cpi)
-
 
 datos <- grosses %>% 
     mutate_at(vars(weekly_gross:seats_sold), ~ ifelse(performances + previews == 0 | . == 0, NA, .)) %>% 
@@ -34,8 +32,6 @@ datos <- grosses %>%
     mutate(week_of_run = row_number()) %>%
     ungroup()
 
-
-
 calculate_weeks_since_start <- function(x) {
     as.integer(pmax(1, difftime("1985-06-09", x, units = "weeks")))
 }
@@ -52,14 +48,11 @@ pre_1985 <- datos %>%
     ungroup() %>%
     select(week_ending, show, week_of_run_originals)
 
-
 grosses_clean <- datos %>%
     left_join(pre_1985, by = c("show", "week_ending")) %>%
     # En este paso sustituye los valores de las obras que fueron estrenadas antes de 1985
     mutate(week_of_run = coalesce(week_of_run_originals, week_of_run)) %>%
     select(-week_of_run_originals)
-
-
 
 resumen <- grosses_clean %>% 
     group_by(show, run_number) %>% 
@@ -75,7 +68,6 @@ resumen <- grosses_clean %>%
            label = str_c(num_label, " ", show),
            axis_x = rep(ymd(c("1985/01/01", "1997/01/01")), each = 15),
            axis_y = c(seq(2000, 1200, length.out = 15), seq(2000, 1200, length.out = 15)))
-
 
 p1 <- ggplot(resumen) +
     geom_sigmoid(aes(x = fecha_min,
@@ -112,7 +104,7 @@ p1 <- ggplot(resumen) +
                   axis_y,
                   label = label),
               size = 3.5,
-              fontface = "bold",
+              #fontface = "bold",
               family = "Roboto Condensed Light",
               hjust = 0,
               color = "grey80") +
@@ -125,22 +117,23 @@ p1 <- ggplot(resumen) +
                        position = "right",
                        expand = expand_scale(mult = c(0, .1))
     ) +
-    labs(title = "<span style='font-size:20pt'>Los 30 espectáculos teatrales más exitosos de</span><br><br><span style='font-size:40pt'>**Broadway**</span>",
-         caption = "Source: Playbill | Graphic: @ysamano28 ",
+    labs(title = "Los 30 espectáculos teatrales más exitosos de",
+         subtitle = "Broadway",
+         caption = "Source: Playbill | Graphic: @ysamano28",
          y = "Ingreso acumulado bruto desde la primera semana de presentación\n") +
-    
-    
-    
-    theme_ybn_b(base_family = "Roboto Condensed Light") +
+    theme_ybn(colour_background = "#1b1f2b",
+              base_colour = "gray95",
+              title_face = "bold",
+              title_hjust = 0.5,
+              subtitle_size = 30,
+              subtitle_face = "bold",
+              caption_hjust = 0.5,
+              axis_text_size = 9) +
     theme(legend.position = "none",
+          panel.grid = element_line(colour = "gray20", size = 0.1),
           panel.grid.major.x = element_blank(),
           panel.grid.minor.x = element_blank(),
-          axis.title.x = element_blank(),
-          plot.title = element_markdown(family = "Roboto Condensed",
-                                        face = "bold",
-                                        color = "white",
-                                        hjust = 0.5,
-                                        margin = margin(t = 10, b = 10)
-          ))
+          axis.title.x = element_blank()
+          )
 
-ggsave("2020/week_18/broadway2.png", p1, height = 11, width = 8.5, units = "in", dpi = 300)
+ggsave("2020/week_18/broadway.png", p1, height = 11, width = 8, units = "in", dpi = 300)

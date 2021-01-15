@@ -34,23 +34,24 @@ data_graph <- total_eruption %>%
 
 
 p1 <- ggplot(data_graph, aes(x = x, y = y)) + 
-    geom_point(alpha = 0.8, colour = "#ff0055") + 
-    facet_wrap(~ name_tot, ncol = 12) + 
+    geom_point(size = 0.9,
+               alpha = 0.7, 
+               colour = "#ff0055") + 
+    facet_wrap(~ name_tot, ncol = 13) + 
     coord_fixed() +
     labs(title = "The most active volcanoes since 1800",
-         subtitle = "Volcanoes with 10 or more eruptions",
+         subtitle = "Volcanoes with ten or more eruptions",
          caption = "Souce: The Smithsonian Institution | Graphic: @ysamano28") +
-    theme_void(base_family = "Roboto Condensed Light", base_size = 9) +
-    theme(plot.background = element_rect(fill = "#1b1f2b", color = "#1b1f2b"),
-          plot.title = element_text(family = "Roboto Condensed", colour = "white", face = "bold",
-                                    size = 30, hjust = 0.5, margin = margin(t = 15, b = 5)),
-          plot.subtitle = element_text(colour = "white", face = "bold", size = 15, hjust = 0.5,
-                                       margin = margin(b = 15)),
-          plot.caption = element_text(colour = "white", size = 10, hjust = 0.98,
-                                      margin = margin(t = 5, b = 10)),
-          strip.text = element_text(colour = "white", face = "bold"))
+    theme_ybn(plot_margin = margin(20, 10, 20, 10),
+              title_face = "bold",
+              title_hjust = 0.5,
+              caption_hjust = 0.5,
+              strip_size = 6.5,
+              strip_face = "bold",
+              strip_hjust = 0.5,
+              axis_grid = FALSE,
+              axis_text = FALSE,
+              axis_title = FALSE) +
+    theme(strip.text = element_text(family = "Roboto Condensed Light"))
 
-
-ggsave("2020/week_20/volcano3.png", p1, height = 12.5, width = 8.5, units = "in", dpi = 300)
-
-
+ggsave("2020/week_20/volcano.png", p1, height = 11.2, width = 8, units = "in", dpi = 300)

@@ -5,17 +5,17 @@ tuesdata <- tidytuesdayR::tt_load(2020, week = 32)
 
 energy_types <- tuesdata$energy_types
 
-my_theme <- theme_ybn_w(base_size = 8,
-                        title_hjust = 0.5,
-                        subtitle_hjust = 0.5,
-                        subtitle_margin_b = 20,
-                        plot_margin = margin(10, 10, 10, 10),
-                        axis_grid = F,
-                        axis_text = F,
-                        axis_title = F) +
+my_theme <- theme_ybn(base_size = 9, 
+                      title_hjust = 0.5,
+                      title_face = "bold",
+                      subtitle_margin_b = 20,
+                      caption_hjust = 0.5,
+                      plot_margin = margin(10, 10, 10, 10),
+                      axis_grid = F,
+                      axis_text = F,
+                      axis_title = F) +
   theme(legend.position = "none",
         strip.text = element_blank())
-
 
 crear_coord <- function(conventional, nuclear, renewable) {
   
@@ -68,8 +68,6 @@ legend <- tibble::tribble(
 )
 
 colores <- c("#42454D", "#7EAA91", "#447764")
-
-
 
 p1 <- ggplot(data_graph %>% 
                filter(country_name == "Spain"))+
@@ -149,14 +147,6 @@ p2 <- ggplot(data_graph) +
   coord_fixed() +
   my_theme
 
-
 patch <- p1 / p2 + plot_layout(heights = c(0.2, 1.2))
 
-
-ggsave(filename = "2020/week_32/European_Energy_production2.png", 
-       plot = patch, 
-       height = 230, 
-       width = 150, 
-       units = "mm",
-       type = "cairo")
-
+ggsave(filename = "2020/week_32/European_Energy_production.png", plot = patch, height = 230, width = 150, units = "mm", type = "cairo")
