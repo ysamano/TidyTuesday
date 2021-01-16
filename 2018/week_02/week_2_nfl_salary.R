@@ -12,12 +12,14 @@ salary <- nfl_salary %>%
 p1 <- ggplot(salary, aes(year, salary_position / 1000000, group = year)) +
     geom_quasirandom(size = 0.7,
                      alpha = .3,
-                     colour = "#54278f") +
+                     colour = "#d0587e") +
     facet_wrap( ~ position, ncol = 5) +
     scale_y_continuous(labels = scales::dollar_format(suffix = "m")) +
     labs(x = "Year", y = "Salary",
          title = "NFL Positional Salaries",
          caption = "Source: spotrac.com | Graphic: @ysamano28") +
-    theme_ybn_w(base_size = 7)
+    theme_ybn(base_size = 10,
+              title_margin_b = 20,
+              axis_text_size = 8)
 
-ggsave("2018/week_02/nfl_salaries.png", p1, height = 6.8, width = 8.8, units = "in", type = "cairo")
+ggsave("2018/week_02/nfl_salaries.png", p1, height = 7, width = 9, units = "in", type = "cairo")
