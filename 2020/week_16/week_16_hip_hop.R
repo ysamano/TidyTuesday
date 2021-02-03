@@ -39,7 +39,8 @@ p1 <-
               #fontface = "bold",
               family = "Roboto Condensed Light") +
     scale_size_continuous(range = c(1, 3)) +
-    scale_fill_manual(values = rankings2$colour) +
+    scale_fill_manual(values = rankings2 %>%
+                          arrange(year) %>% pull(colour)) +
     coord_equal() + 
     theme_void() +
     theme(legend.position="none")
@@ -70,8 +71,9 @@ patchwork <- p1 / p2 + plot_layout(heights = c(1, 0.9)) +
                                     color = "white",
                                     hjust = 0.5, 
                                     margin = margin(t = 15, b = 10)),
-          plot.subtitle = element_markdown(family = "Roboto Condensed",
-                                           size = 13, 
+          plot.subtitle = element_markdown(family = "Roboto Condensed Light",
+                                           face = "bold",
+                                           size = 15, 
                                            color = "white",
                                            hjust = 0.5,
                                            margin = margin(b = 0)),
@@ -80,6 +82,5 @@ patchwork <- p1 / p2 + plot_layout(heights = c(1, 0.9)) +
                                       color = "white",
                                       hjust = 0,
                                       margin = margin(t = 10, b = 5, l = 15)))
-
 
 ggsave("2020/week_16/hip_hop.png", plot = patchwork, height = 12, width = 8.5, units = "in", dpi = 300)
